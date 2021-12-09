@@ -11,6 +11,7 @@
         android:theme="@style/Theme.Caprimul">
         <activity
             android:name=".activities.MainActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

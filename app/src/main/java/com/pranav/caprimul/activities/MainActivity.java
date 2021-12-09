@@ -54,13 +54,14 @@ public class MainActivity extends AppCompatActivity implements RvAdapter.CarsInt
     }
 
     private void insertIntoDatabase() {
-        if (!isEdit) {
-            dataBase.mainDao().insertIntoCars(carsEntity);
-            Toast.makeText(context, "Data Added To List", Toast.LENGTH_SHORT).show();
-        } else {
+        if (isEdit) {
             dataBase.mainDao().updateCars(carsEntity);
             isEdit = false;
             Toast.makeText(context, "Data Updated From List", Toast.LENGTH_SHORT).show();
+        } else {
+//            carsEntity.setId();
+            dataBase.mainDao().insertIntoCars(carsEntity);
+            Toast.makeText(context, "Data Added To List", Toast.LENGTH_SHORT).show();
         }
         etCarColor.setText("");
         etCarName.setText("");

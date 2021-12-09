@@ -11,14 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:maxLines="1"
         android:hint="@string/str_enter_car_name" />
 
     <EditText
         android:id="@+id/etCarColor"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:layout_weight="1"
+        android:maxLines="1"
         android:hint="@string/str_enter_car_name" />
 
     <Button
@@ -26,7 +27,6 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:text="@string/str_add" />
 
@@ -34,6 +34,5 @@
         android:id="@+id/rvDisplay"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:layout_weight="9" />
 </LinearLayout>
