@@ -41,9 +41,15 @@ public class MainActivity extends AppCompatActivity implements RvAdapter.CarsInt
         rvDisplay.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         rvDisplay.setAdapter(rvAdapter);
         btAdd.setOnClickListener(v -> {
-            carsEntity.setCarName(etCarName.getText().toString().trim());
-            carsEntity.setColor(etCarColor.getText().toString().trim());
-            insertIntoDatabase();
+            if(etCarName.getText().toString().trim().equals("")){
+                etCarName.setError("Field id empty");
+            }else if(etCarColor.getText().toString().trim().equals("")){
+                etCarColor.setError("Field id empty");
+            }else{
+                carsEntity.setCarName(etCarName.getText().toString().trim());
+                carsEntity.setColor(etCarColor.getText().toString().trim());
+                insertIntoDatabase();
+            }
         });
         updateList();
     }
@@ -59,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements RvAdapter.CarsInt
             isEdit = false;
             Toast.makeText(context, "Data Updated From List", Toast.LENGTH_SHORT).show();
         } else {
-//            carsEntity.setId();
             dataBase.mainDao().insertIntoCars(carsEntity);
             Toast.makeText(context, "Data Added To List", Toast.LENGTH_SHORT).show();
         }
