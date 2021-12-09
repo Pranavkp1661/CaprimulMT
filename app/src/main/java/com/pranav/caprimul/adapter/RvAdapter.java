@@ -20,17 +20,17 @@ import java.util.List;
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvViewHolder> {
     Context context;
     List<CarsEntity> carsEntities = new ArrayList<>();
-    CarsInterface carsInterface;
+    CarsInterface carsListener;
 
-    public RvAdapter(Context context, List<CarsEntity> carsEntities, CarsInterface carsInterface) {
+    public RvAdapter(Context context, List<CarsEntity> carsEntities, CarsInterface carsListener) {
         this.context = context;
         this.carsEntities = carsEntities;
-        this.carsInterface = carsInterface;
+        this.carsListener = carsListener;
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateAdapter(List<CarsEntity> carsEntities){
-        this.carsEntities=carsEntities;
+    public void updateAdapter(List<CarsEntity> carsEntities) {
+        this.carsEntities = carsEntities;
         notifyDataSetChanged();
     }
 
@@ -46,13 +46,21 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvViewHolder> {
         holder.tvCarName.setText(carsEntities.get(position).getCarName());
         holder.tvCarColor.setText(carsEntities.get(position).getColor());
         holder.btEdit.setOnClickListener(v -> {
-
+            carsListener.updateCars(carsEntities.get(position));
+        });holder.btDelete.setOnClickListener(v -> {
+            carsListener.deleteCars(carsEntities.get(position));
         });
     }
 
     @Override
     public int getItemCount() {
         return carsEntities.size();
+    }
+
+    public interface CarsInterface {
+        void updateCars(CarsEntity carsEntity);
+
+        void deleteCars(CarsEntity carsEntity);
     }
 
     public static class RvViewHolder extends RecyclerView.ViewHolder {
@@ -68,9 +76,5 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvViewHolder> {
             btDelete = itemView.findViewById(R.id.btDelete);
             btEdit = itemView.findViewById(R.id.btEdit);
         }
-    }
-    public interface CarsInterface {
-        void updateCars(CarsEntity carsEntity);
-        void deleteCars(CarsEntity carsEntity);
     }
 }

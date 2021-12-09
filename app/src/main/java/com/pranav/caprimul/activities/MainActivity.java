@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -39,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements RvAdapter.CarsInt
         rvDisplay.setLayoutManager(new LinearLayoutManager(context));
         rvDisplay.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         rvDisplay.setAdapter(rvAdapter);
-
         btAdd.setOnClickListener(v -> {
             carsEntity.setCarName(etCarName.getText().toString().trim());
             carsEntity.setColor(etCarColor.getText().toString().trim());
@@ -56,13 +56,16 @@ public class MainActivity extends AppCompatActivity implements RvAdapter.CarsInt
     private void insertIntoDatabase() {
         if (!isEdit) {
             dataBase.mainDao().insertIntoCars(carsEntity);
+            Toast.makeText(context, "Data Added To List", Toast.LENGTH_SHORT).show();
         } else {
             dataBase.mainDao().updateCars(carsEntity);
             isEdit = false;
+            Toast.makeText(context, "Data Updated From List", Toast.LENGTH_SHORT).show();
         }
         etCarColor.setText("");
         etCarName.setText("");
         carsEntity = new CarsEntity();
+        btAdd.setText(R.string.str_add);
         updateList();
     }
 
@@ -78,10 +81,17 @@ public class MainActivity extends AppCompatActivity implements RvAdapter.CarsInt
     @Override
     public void updateCars(CarsEntity carsEntity) {
         isEdit = true;
+        this.carsEntity = carsEntity;
+        etCarName.setText(carsEntity.getCarName());
+        etCarColor.setText(carsEntity.getColor());
+        btAdd.setText(R.string.str_update);
+        updateList();
     }
 
     @Override
     public void deleteCars(CarsEntity carsEntity) {
-
+        dataBase.mainDao().deleteFromCars(carsEntity);
+        updateList();
+        Toast.makeText(context, "Data Deleted From List", Toast.LENGTH_SHORT).show();
     }
 }
