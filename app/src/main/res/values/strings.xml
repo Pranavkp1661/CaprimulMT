@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Caprimul</string>
+    <string name="str_enter_car_name">Enter Car Name</string>
+    <string name="str_add">Add</string>
 </resources>

@@ -17,12 +17,6 @@ public class CarsEntity {
     public CarsEntity() {
     }
 
-    public CarsEntity(int id, String carName, String color) {
-        this.id = id;
-        this.carName = carName;
-        this.color = color;
-    }
-
     public int getId() {
         return id;
     }

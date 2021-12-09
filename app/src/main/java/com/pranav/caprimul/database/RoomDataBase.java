@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import com.pranav.caprimul.models.CarsEntity;
 
-@Database(entities = CarsEntity.class,version = 1)
+@Database(entities = CarsEntity.class,version = 1, exportSchema = false)
 public abstract class RoomDataBase extends RoomDatabase {
     private static final String DATABASE_NAME = "database";
     private static RoomDataBase database;
