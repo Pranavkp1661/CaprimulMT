@@ -1,5 +1,6 @@
 package com.pranav.caprimul.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +20,18 @@ import java.util.List;
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvViewHolder> {
     Context context;
     List<CarsEntity> carsEntities = new ArrayList<>();
+    CarsInterface carsInterface;
 
-    public RvAdapter(Context context, List<CarsEntity> carsEntities) {
+    public RvAdapter(Context context, List<CarsEntity> carsEntities, CarsInterface carsInterface) {
         this.context = context;
         this.carsEntities = carsEntities;
+        this.carsInterface = carsInterface;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateAdapter(List<CarsEntity> carsEntities){
+        this.carsEntities=carsEntities;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -36,6 +45,9 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvViewHolder> {
     public void onBindViewHolder(@NonNull RvViewHolder holder, int position) {
         holder.tvCarName.setText(carsEntities.get(position).getCarName());
         holder.tvCarColor.setText(carsEntities.get(position).getColor());
+        holder.btEdit.setOnClickListener(v -> {
+
+        });
     }
 
     @Override
@@ -56,5 +68,9 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvViewHolder> {
             btDelete = itemView.findViewById(R.id.btDelete);
             btEdit = itemView.findViewById(R.id.btEdit);
         }
+    }
+    public interface CarsInterface {
+        void updateCars(CarsEntity carsEntity);
+        void deleteCars(CarsEntity carsEntity);
     }
 }
