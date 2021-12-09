@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pranav.caprimul.R;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText etCarName,etCarColor;
+    private EditText etCarName;
+    private EditText etCarColor;
     private Button btAdd;
     private RecyclerView rvDisplay;
 
